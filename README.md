@@ -58,12 +58,6 @@ Ajouter :
 install_path: "/home/nathan/ac-serveur"
 ```
 
-Tester :
-
-``` bash
-sudo ./server-manager
-```
-
 ------------------------------------------------------------------------
 
 # 3️⃣ Création du service systemd
