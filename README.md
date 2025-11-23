@@ -76,7 +76,7 @@ Contenu :
     Type=simple
     User=nathan
     WorkingDirectory=/home/nathan/web/linux
-    ExecStart=/home/nathan/web/linux/monscript.sh
+    ExecStart=/home/nathan/web/linux/server-manager
     Restart=on-failure
 
     [Install]
@@ -95,8 +95,8 @@ systemctl status server-manager.service
 
 # 🌐 Accès
 
--   URL : http://192.168.1.105:8772\
--   Login : admin\
+-   URL : http://IP:8772\
+-   Login : admin
 -   Mot de passe : servermanager
 
 ------------------------------------------------------------------------
