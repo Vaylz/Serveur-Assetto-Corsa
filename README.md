@@ -1,38 +1,38 @@
 # Serveur-Assetto-Corsa
 # 🏎️ Installation d'un Serveur Assetto Corsa + Server Manager
 
-## 📦 Pré-requis
+## Pré-requis
 
 ``` bash
 sudo apt update && sudo apt upgrade
-sudo apt install lib32gcc-s1 lib32stdc++6 zlib1g:i386
+sudo apt install lib32gcc-s1 lib32stdc++6 sudo unzip
 ```
 
 ------------------------------------------------------------------------
 
 # 1️⃣ Installation du serveur Assetto Corsa
 
-## 📁 Créer un dossier pour SteamCMD
+## Créer un dossier pour SteamCMD
 
 ``` bash
 mkdir ~/steam
 cd ~/steam
 ```
 
-## 📥 Télécharger SteamCMD
+## Télécharger SteamCMD
 
 ``` bash
 wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 tar -xvzf steamcmd_linux.tar.gz -C ~/steam
 ```
 
-## 🚀 Lancer SteamCMD
+## Lancer SteamCMD
 
 ``` bash
 sudo ./steamcmd.sh
 ```
 
-## 📌 Dans SteamCMD
+## Dans SteamCMD
 
     force_install_dir /home/nathan/ac-serveur
     login "username"
@@ -44,9 +44,8 @@ sudo ./steamcmd.sh
 # 2️⃣ Installation de l'interface graphique : Server Manager
 
 ``` bash
-sudo apt install unzip
-mkdir ~/web
-cd ~/web
+mkdir web
+cd /web
 wget https://github.com/JustaPenguin/assetto-server-manager/releases/download/v1.7.9/server-manager_v1.7.9.zip
 unzip server-manager_v1.7.9.zip -d /home/nathan/web
 cd ~/web/linux
@@ -108,8 +107,53 @@ systemctl status server-manager.service
 
 ------------------------------------------------------------------------
 
-# 📚 Sources
+# 🔧 Ouverture des ports pour Assetto Corsa
 
--   https://steamdb.info/app/376030/\
--   https://www.reddit.com/r/assettocorsa/comments/t154ft/guide_assetto_corsa_dedicated_server_setup/?tl=fr\
--   https://github.com/assetto-corsa-web/accweb?tab=readme-ov-file#installation-and-configuration
+Pour faire fonctionner correctement un serveur Assetto Corsa, vous devez
+ouvrir les ports suivants :
+
+-   **UDP 9600** -- Communication du serveur\
+-   **TCP 9599** -- Retour d'informations\
+-   **TCP 8081** -- Interface HTTP / API du Server Manager
+
+------------------------------------------------------------------------
+
+## 🔓 Avec UFW (si activé)
+
+``` bash
+sudo ufw allow 9600/udp
+sudo ufw allow 9599/tcp
+sudo ufw allow 8081/tcp
+sudo ufw reload
+```
+
+------------------------------------------------------------------------
+
+## 🔓 Avec nftables
+
+Modifier la configuration :
+
+``` bash
+sudo nano /etc/nftables.conf
+```
+
+Ajouter dans `table inet filter` :
+
+``` nft
+chain input {
+    type filter hook input priority 0;
+
+    # Ports Assetto Corsa
+    udp dport 9600 accept
+    tcp dport 9599 accept
+
+    # Server Manager HTTP
+    tcp dport 8081 accept
+}
+```
+
+Recharger :
+
+``` bash
+sudo systemctl reload nftables
+```
