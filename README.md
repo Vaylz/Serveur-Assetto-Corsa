@@ -107,10 +107,10 @@ systemctl status server-manager.service
 
 ------------------------------------------------------------------------
 
-# 🔧 Ouverture des ports pour Assetto Corsa
+# Ouverture des ports pour Assetto Corsa
 
-Pour faire fonctionner correctement un serveur Assetto Corsa, vous devez
-ouvrir les ports suivants :
+Pour faire fonctionner correctement un serveur Assetto Corsa avec les serveurs Kunos, vous devez
+ouvrir les ports suivants sur Linux et votre box internet :
 
 -   **UDP 9600** -- Communication du serveur\
 -   **TCP 9599** -- Retour d'informations\
@@ -118,18 +118,7 @@ ouvrir les ports suivants :
 
 ------------------------------------------------------------------------
 
-## 🔓 Avec UFW (si activé)
-
-``` bash
-sudo ufw allow 9600/udp
-sudo ufw allow 9599/tcp
-sudo ufw allow 8081/tcp
-sudo ufw reload
-```
-
-------------------------------------------------------------------------
-
-## 🔓 Avec nftables
+## Avec nftables
 
 Modifier la configuration :
 
@@ -152,8 +141,8 @@ chain input {
 }
 ```
 
-Recharger :
+activer nftables au démarrage de Linux :
 
 ``` bash
-sudo systemctl reload nftables
+sudo systemctl start nftables
 ```
