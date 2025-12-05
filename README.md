@@ -108,7 +108,7 @@ ouvrir les ports suivants sur Linux et votre box internet :
 
 -   **UDP 9600** -- Communication du serveur\
 -   **TCP 9599** -- Retour d'informations\
--   **TCP 8081** -- Interface HTTP / API du Server Manager
+-   **TCP 8081** -- HTTP Kunos
 
 ------------------------------------------------------------------------
 
