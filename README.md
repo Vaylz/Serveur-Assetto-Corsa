@@ -103,7 +103,7 @@ systemctl status server-manager.service
 
 # Ouverture des ports pour Assetto Corsa
 
-Pour faire fonctionner correctement un serveur Assetto Corsa avec les serveurs Kunos, vous devez
+Pour faire fonctionner correctement votre serveur Assetto Corsa avec les serveurs Kunos, vous devez
 ouvrir les ports suivants sur Linux et votre box internet :
 
 -   **UDP 9600** -- Communication du serveur\
@@ -120,7 +120,7 @@ Modifier la configuration :
 sudo nano /etc/nftables.conf
 ```
 
-Ajouter dans `table inet filter` :
+Ajouter le code suivant :
 
 ``` nft
 chain input {
